@@ -9,7 +9,6 @@
 
 
 {% block 'body' %}
-    {%static 'arquivo.txt'%}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3 sidebar">
@@ -27,13 +26,13 @@
                         <p style="margin-top:-20px" class="cor_branca descricao">Nos melhores preços</p>
                         <br>
                         <br>
-                        <a class="btn_logar" href="">LOGAR</a>
+                        <a class="btn_logar" href="{% url 'logar' %}">LOGAR</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="area_cadastrar">
-                    <form action="" method="">
+                    <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
                         <h2 class="titulo_area_cadastrar">Cadastre-se</h2>
                         <br>
                         <input name="username" class="input_cadastrar input_cadastrar_nome" type="text"
