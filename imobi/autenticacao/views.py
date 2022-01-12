@@ -34,4 +34,4 @@ def cadastro(request):
 
 
 def logar(request):
-    return HttpResponse('Logar')
+    return render(request, 'logar.html')
