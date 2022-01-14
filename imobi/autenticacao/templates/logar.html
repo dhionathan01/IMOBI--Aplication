@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-9">
             <div class="area_cadastrar">
-                <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+                <form action="{% url 'logar' %}" method="POST">{% csrf_token %}
                     <h2 class="titulo_area_cadastrar">Logar</h2>
                     {% if messages %}
                         {% for message in messages %}
