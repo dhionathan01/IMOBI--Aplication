@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Imovel, Cidade
+from django.shortcuts import get_object_or_404
 
 
 @login_required(login_url='/auth/logar')
@@ -28,3 +29,9 @@ def home(request):
     else:
         imoveis = Imovel.objects.all()
     return render(request, 'home.html', {'imoveis': imoveis, 'cidades': cidades})
+
+
+def imovel(request, id):
+    imovel = get_object_or_404(Imovel, id=id)
+    sugestoes = Imovel.objects.filter(cidade=imovel.cidade).exclude(id=id)[:2]
+    return render(request, 'imovel.html', {'imovel': imovel, 'sugestoes': sugestoes, 'id': id})
