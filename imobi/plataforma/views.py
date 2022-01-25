@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Imovel, Cidade, Visitas
 from django.shortcuts import get_object_or_404
@@ -51,4 +51,16 @@ def agendar_visitas(request):
     )
 
     visitas.save()
-    return HttpResponse('teste')
+    return redirect('/agendamentos')
+
+
+def agendamentos(request):
+    visitas = Visitas.objects.filter(usuario=request.user)
+    return render(request, "agendamentos.html", {'visitas': visitas})
+
+
+def cancelar_agendamento(request, id):
+    visitas = get_object_or_404(Visitas, id=id)
+    visitas.status = "C"
+    visitas.save()
+    return redirect('/agendamentos')
